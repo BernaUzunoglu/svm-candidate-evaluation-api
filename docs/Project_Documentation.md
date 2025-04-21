@@ -11,6 +11,12 @@ Adayların:
 verilerine göre **işe alınıp alınmayacağını** tahmin eden bir model oluşturmak.
 
 ---
+## 🚀 Canlı Demo
+
+Projeye ait Streamlit uygulamasını canlı olarak incelemek için aşağıdaki bağlantıya tıklayabilirsiniz:
+
+👉 [Yazılım Geliştirici Aday Değerlendirme Uygulaması – Canlı Demo](https://svm-candidate-evaluation-api.streamlit.app/)
+---
 
 ## 🏷️ Etiketleme Kriteri (Kural Tabanlı)
 
