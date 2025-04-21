@@ -167,6 +167,6 @@ response = requests.post("http://localhost:8000/train")
 
 Bu projeye ait Streamlit tabanlı görsel kullanıcı arayüzünü aşağıdaki PDF dokümanından inceleyebilirsiniz:
 
-📄 [Streamlit Demo Görselleri (PDF)](assets/streamlit-demo.pdf)
+📄 [Streamlit Demo Görselleri (PDF)](https://github.com/BernaUzunoglu/svm-candidate-evaluation-api/blob/main/assets/streamlit-ui-demo.pdf)
 
 ---
