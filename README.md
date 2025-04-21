@@ -8,6 +8,7 @@ Bu proje, yazılım geliştirici pozisyonu için başvuran adayların, tecrübe 
 Projeye ait Streamlit uygulamasını canlı olarak incelemek için aşağıdaki bağlantıya tıklayabilirsiniz:
 
 👉 [Yazılım Geliştirici Aday Değerlendirme Uygulaması – Canlı Demo](https://svm-candidate-evaluation-api.streamlit.app/)
+
 ---
 
 ## 🎯 Proje Aşamaları
