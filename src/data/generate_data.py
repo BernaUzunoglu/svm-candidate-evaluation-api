@@ -89,4 +89,4 @@ def save_data(data, filename='candidate_data.csv'):
 if __name__ == "__main__":
     # Veri oluştur ve kaydet
     data = generate_candidate_data()
-    save_data(data,"candidate_data_v1.csv")
+    save_data(data, "candidate_data.csv")

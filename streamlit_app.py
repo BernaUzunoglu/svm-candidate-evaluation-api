@@ -6,9 +6,24 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 import json
-from src.config import  Config
+from src.config import Config
+import subprocess
+import threading
+import time
 
 st.set_page_config(page_title="Aday Değerlendirme", page_icon="👩‍💻", layout="wide")
+
+def run_fastapi():
+    subprocess.Popen(["uvicorn", "src.api.app:app", "--host", "127.0.0.1", "--port", "8000"])
+
+# FastAPI’yi ayrı bir thread olarak başlat (bir kez çalışsın)
+@st.cache_resource
+def start_fastapi_once():
+    threading.Thread(target=run_fastapi, daemon=True).start()
+    time.sleep(2)  # API'nin ayağa kalkmasını bekle (2 saniye yeterli olur genelde)
+
+# Başlatmayı tetikle
+start_fastapi_once()
 
 #  Kenarlardan ortalamak için custom padding (CSS)
 st.markdown("""

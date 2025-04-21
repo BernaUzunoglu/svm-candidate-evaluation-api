@@ -40,27 +40,46 @@ Bu proje, yazılım geliştirici pozisyonu için başvuran adayların, tecrübe 
 - **İşe Alınır (0)**:
   - Diğer tüm durumlar
 
-## 🛠️ Proje Yapısı
+## 📁 Proje Yapısı
+
+Proje aşağıdaki gibi yapılandırılmıştır. Modülerlik, okunabilirlik ve sürdürülebilirlik göz önünde bulundurularak organize edilmiştir.
+
 
 ```
-.
-├── data/               # Veri dosyaları
-│   ├── candidate_data.csv    # Aday verileri
-│   ├── model.joblib         # Kayıtlı model
-│   └── decision_boundary.png # Karar sınırı görseli
-├── src/               # Kaynak kodlar
-│   ├── data/         # Veri işleme modülleri
-│   │   └── generate_data.py  # Veri üretimi
-│   ├── models/       # Model eğitimi ve değerlendirme
-│   │   └── train_model.py    # Model işlemleri
-│   ├── api/          # API modülleri
-│   │   ├── app.py           # FastAPI uygulaması
-│   │   └── test_client.py   # API test istemcisi
-│   └── main.py       # Ana uygulama
-├── notebooks/         # Jupyter notebook'lar
-├── tests/            # Test dosyaları
-├── requirements.txt  # Bağımlılıklar
-└── README.md         # Proje dokümantasyonu
+svm-candidate-evaluation-api/
+│
+├── data/                              # Model ve veri dosyalarının saklandığı dizin
+│   ├── best_model_linear.joblib       # En iyi performansı veren modelin kaydı
+│   ├── candidate_data.csv             # Üretilen örnek aday verileri
+│   └── model.joblib                   # Alternatif model dosyası
+│
+├── docs/                              # Proje dokümantasyonları
+│   └── Project_Documentation.md       # Proje ile ilgili açıklamalar ve kullanım bilgileri
+│
+├── src/                               # Tüm kaynak kodları içeren ana klasör
+│   ├── api/                           # FastAPI tabanlı REST API endpointleri
+│   │   ├── app.py                     # Uygulamanın ana API dosyası
+│   │   └── test_client.py             # API testleri için basit istemci
+│   │
+│   ├── data/                          # Veri üretme işlemlerini içeren modül
+│   │   └── generate_data.py           # Aday verisi oluşturan fonksiyonlar
+│   │
+│   ├── models/                        # Model eğitimi, değerlendirmesi ve kaydı
+│   │   └── train_model.py             # SVM modellerini eğiten ve kaydeden kodlar
+│   │
+│   └── results/                       # Model değerlendirme çıktıları
+│       ├── all_results.csv            # Tüm modellerin karşılaştırmalı sonuçları
+│       ├── decision_boundary_*.png    # Modellerin karar sınırlarını görselleştiren grafikler
+│       └── *_report.json              # Her model için detaylı değerlendirme metrikleri
+│
+├── config.py                          # Genel konfigürasyonları içeren dosya
+├── main.py                            # Opsiyonel olarak ana çalıştırma dosyası
+├── .env                               # Ortam değişkenlerini tanımlayan dosya
+├── .gitignore                         # Git tarafından takip edilmeyecek dosyalar
+├── README.md                          # Projeye genel bakış ve kullanım yönergeleri
+├── requirements.txt                   # Gerekli Python paketleri
+└── streamlit_app.py                   # Streamlit tabanlı web arayüzü
+
 ```
 
 ## 🚀 Kurulum ve Kullanım
@@ -70,19 +89,23 @@ Bu proje, yazılım geliştirici pozisyonu için başvuran adayların, tecrübe 
 pip install -r requirements.txt
 ```
 
-2. **API'yi başlatın**:
+2. **FastAPI'yi başlatın**:
 ```bash
-python src/api/app.py
+uvicorn src.api.app:app --reload
 ```
+- API dokümantasyonuna erişmek için: `http://localhost:8000/docs`
+- Swagger UI üzerinden endpoint'leri test edin
 
-3. **Test istemcisini çalıştırın**:
+3. **Streamlit uygulamasını başlatın**:
+```bash
+streamlit run streamlit_app.py
+```
+- Web arayüzüne erişmek için: `http://localhost:8501`
+
+4. **Test istemcisini çalıştırın**:
 ```bash
 python src/api/test_client.py
 ```
-
-4. **API'yi test edin**:
-- Tarayıcıda `http://localhost:8000/docs` adresine gidin
-- Swagger UI üzerinden endpoint'leri test edin
 
 ## 📈 Model Performansı
 
@@ -137,4 +160,13 @@ response = requests.post("http://localhost:8000/train")
 4. **Frontend Geliştirme**:
    - Web arayüzü
    - Dashboard
-   - Görselleştirmeler 
+   - Görselleştirmeler
+
+---
+## 🎥 Uygulama Arayüzü (PDF)
+
+Bu projeye ait Streamlit tabanlı görsel kullanıcı arayüzünü aşağıdaki PDF dokümanından inceleyebilirsiniz:
+
+📄 [Streamlit Demo Görselleri (PDF)](assets/streamlit-demo.pdf)
+
+---

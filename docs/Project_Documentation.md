@@ -44,3 +44,11 @@ verilerine göre **işe alınıp alınmayacağını** tahmin eden bir model olu�
 8. Model başarı metrikleri hesaplandı.
 
 ---
+
+## 🎥 Uygulama Arayüzü (PDF)
+
+Bu projeye ait Streamlit tabanlı görsel kullanıcı arayüzünü aşağıdaki PDF dokümanından inceleyebilirsiniz:
+
+📄 [Streamlit Demo Görselleri (PDF)](assets/streamlit-demo.pdf)
+
+---

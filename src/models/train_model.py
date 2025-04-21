@@ -2,13 +2,14 @@ import json
 import joblib
 import numpy as np
 import pandas as pd
+from pathlib import Path
 from sklearn.svm import SVC
+from src.config import Config
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-import matplotlib.pyplot as plt
-from src.config import Config
-from pathlib import Path
+
 
 def load_and_preprocess_data(filename='candidate_data.csv'):
     data = pd.read_csv(Config.PROJECT_ROOT / f'data/{filename}')

@@ -2,8 +2,10 @@ import os
 import sys
 import joblib
 import numpy as np
+import pandas as pd
 from typing import Optional
 from pydantic import BaseModel
+from src.config import Config
 from fastapi import FastAPI, HTTPException
 from sklearn.metrics import accuracy_score
 from src.models.train_model import train_svm_models, predict_candidate
@@ -39,11 +41,12 @@ class TrainingResponse(BaseModel):
 async def startup_event():
     global model, scaler
     # Veri dizinini oluştur
-    os.makedirs('data', exist_ok=True)
+    os.makedirs(Config.PROJECT_ROOT / 'data', exist_ok=True)
     print("📌 Startup event başladı...")
 
+    model_path = Config.PROJECT_ROOT / 'data/best_model_linear.joblib'
     # Eğer model dosyası yoksa, yeni model oluştur
-    if not os.path.exists('data/best_model_linear.joblib'):
+    if not os.path.exists(Config.PROJECT_ROOT / 'data/best_model_linear.joblib'):
         # Veri oluştur
         data = generate_candidate_data()
         save_data(data)
@@ -54,11 +57,11 @@ async def startup_event():
         model = train_svm_models(X_train, y_train)
 
         # Modeli kaydet
-        joblib.dump((model, scaler), 'data/best_model_linear.joblib')
+        joblib.dump((model, scaler), model_path)
         print("✅ Model ---------------------")
     else:
         # Kayıtlı modeli yükle
-        model, scaler = joblib.load('data/best_model_linear.joblib')
+        model, scaler = joblib.load(model_path)
         print("✅ Model yüklendi ------------------.")
 
 @app.get("/")
@@ -86,7 +89,9 @@ async def predict(candidate: CandidateInput):
         prediction = predict_candidate(model, scaler, candidate.tecrube_yili, candidate.teknik_puan)
         
         # Güven skorunu hesapla
-        X = np.array([[candidate.tecrube_yili, candidate.teknik_puan]])
+        # X = np.array([[candidate.tecrube_yili, candidate.teknik_puan]])
+        X = pd.DataFrame([[candidate.tecrube_yili, candidate.teknik_puan]],
+                         columns=['tecrube_yili', 'teknik_puan'])
         X_scaled = scaler.transform(X)
         confidence = abs(model.decision_function(X_scaled)[0])
         
@@ -123,10 +128,13 @@ async def train_model():
         # Değerlendirme ve kayıt
         output_dir = 'src/results'
         evaluate_and_save_models(models, X_test, y_test, output_dir)
-        save_best_model_as_pickle(models, X_test, y_test, scaler, 'data')
+
+        model_dir = Config.PROJECT_ROOT / 'data'  # 🔧 Model yolu config'ten
+        save_best_model_as_pickle(models, X_test, y_test, scaler, model_dir)
 
         # En iyi modeli yükle
-        model, scaler = joblib.load('data/best_model_linear.joblib')  # dosya adını dinamikleştirebilirsin
+        model_path = model_dir / 'best_model_linear.joblib'  # 🔧 Model dosyası
+        model, scaler = joblib.load(model_path)  # dosya adını dinamikleştirebilirsin
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
 
