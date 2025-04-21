@@ -18,8 +18,6 @@ Projeye ait Streamlit uygulamasını canlı olarak incelemek için aşağıdaki 
 👉 [Yazılım Geliştirici Aday Değerlendirme Uygulaması – Canlı Demo](https://svm-candidate-evaluation-api.streamlit.app/)
 
 
----
-
 ## 🏷️ Etiketleme Kriteri (Kural Tabanlı)
 
 - **Tecrübe < 2 yıl** **ve** **Teknik Puan < 60** ise:  
@@ -51,7 +49,6 @@ Projeye ait Streamlit uygulamasını canlı olarak incelemek için aşağıdaki 
 7. Kullanıcıdan giriş alınıp tahmin yapıldı.
 8. Model başarı metrikleri hesaplandı.
 
----
 
 ## 🎥 Uygulama Arayüzü (PDF)
 

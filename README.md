@@ -9,7 +9,6 @@ Projeye ait Streamlit uygulamasını canlı olarak incelemek için aşağıdaki 
 
 👉 [Yazılım Geliştirici Aday Değerlendirme Uygulaması – Canlı Demo](https://svm-candidate-evaluation-api.streamlit.app/)
 
----
 
 ## 🎯 Proje Aşamaları
 
@@ -171,7 +170,6 @@ response = requests.post("http://localhost:8000/train")
    - Dashboard
    - Görselleştirmeler
 
----
 ## 🎥 Uygulama Arayüzü (PDF)
 
 Bu projeye ait Streamlit tabanlı görsel kullanıcı arayüzünü aşağıdaki PDF dokümanından inceleyebilirsiniz:
